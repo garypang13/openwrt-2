@@ -1,6 +1,6 @@
-From 1b9ae0c92925ac40489be526d67d0010d0724ce0 Mon Sep 17 00:00:00 2001
+From e1f04bf9d38633f0bf9d041089366fea0ad22623 Mon Sep 17 00:00:00 2001
 From: Hauke Mehrtens <hauke@hauke-m.de>
-Date: Thu, 21 May 2020 22:14:22 +0200
+Date: Thu, 21 May 2020 19:50:05 +0200
 Subject: [PATCH] wireless: Use linux/stddef.h instead of stddef.h
 
 When compiling inside the kernel include linux/stddef.h instead of
@@ -10,8 +10,6 @@ mainline kernel. I still would like to fix this problem in the kernel.
 
 Fixes: 6989310f5d43 ("wireless: Use offsetof instead of custom macro.")
 Signed-off-by: Hauke Mehrtens <hauke@hauke-m.de>
-Link: https://lore.kernel.org/r/20200521201422.16493-1-hauke@hauke-m.de
-Signed-off-by: Johannes Berg <johannes.berg@intel.com>
 ---
  include/uapi/linux/wireless.h | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
