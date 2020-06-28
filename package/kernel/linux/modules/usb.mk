@@ -75,7 +75,8 @@ define KernelPackage/usb-phy-qcom-dwc3
   DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x)
   KCONFIG:= CONFIG_PHY_QCOM_DWC3
   FILES:= \
-    $(LINUX_DIR)/drivers/phy/qualcomm/phy-qcom-dwc3.ko
+    $(LINUX_DIR)/drivers/phy/phy-qcom-dwc3.ko@lt4.13 \
+    $(LINUX_DIR)/drivers/phy/qualcomm/phy-qcom-dwc3.ko@ge4.13
   AUTOLOAD:=$(call AutoLoad,45,phy-qcom-dwc3,1)
   $(call AddDepends/usb)
 endef
@@ -478,7 +479,7 @@ $(eval $(call KernelPackage,usb-dwc3))
 
 define KernelPackage/usb-dwc3-of-simple
   TITLE:=DWC3 USB simple OF driver
-  DEPENDS:=@LINUX_4_14 @(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
+  DEPENDS:=@(LINUX_4_9||LINUX_4_14) @(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
   KCONFIG:= CONFIG_USB_DWC3_OF_SIMPLE
   FILES:= $(LINUX_DIR)/drivers/usb/dwc3/dwc3-of-simple.ko
   AUTOLOAD:=$(call AutoLoad,53,dwc3-of-simple,1)
@@ -496,7 +497,7 @@ $(eval $(call KernelPackage,usb-dwc3-of-simple))
 
 define KernelPackage/usb-dwc3-qcom
   TITLE:=DWC3 Qualcomm USB driver
-  DEPENDS:=@(!LINUX_4_14) @(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
+  DEPENDS:=@(!LINUX_4_9||!LINUX_4_14) @(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
   KCONFIG:= CONFIG_USB_DWC3_QCOM
   FILES:= $(LINUX_DIR)/drivers/usb/dwc3/dwc3-qcom.ko
   AUTOLOAD:=$(call AutoLoad,53,dwc3-qcom,1)
@@ -1602,7 +1603,8 @@ define KernelPackage/usb-chipidea
 	CONFIG_USB_CHIPIDEA_UDC=y \
 	CONFIG_USB_CHIPIDEA_DEBUG=y
   FILES:= \
-	$(LINUX_DIR)/drivers/extcon/extcon-core.ko \
+	$(LINUX_DIR)/drivers/extcon/extcon.ko@lt4.9 \
+	$(LINUX_DIR)/drivers/extcon/extcon-core.ko@ge4.9 \
 	$(LINUX_DIR)/drivers/usb/chipidea/ci_hdrc.ko \
 	$(LINUX_DIR)/drivers/usb/common/ulpi.ko@ge4.18 \
 	$(LINUX_DIR)/drivers/usb/roles/roles.ko@ge5.0
@@ -1627,7 +1629,8 @@ define KernelPackage/usb-chipidea2
 	CONFIG_USB_CHIPIDEA_UDC=y \
 	CONFIG_USB_CHIPIDEA_DEBUG=y
   FILES:= \
-	$(LINUX_DIR)/drivers/extcon/extcon-core.ko \
+	$(LINUX_DIR)/drivers/extcon/extcon.ko@lt4.9 \
+	$(LINUX_DIR)/drivers/extcon/extcon-core.ko@ge4.9 \
 	$(LINUX_DIR)/drivers/usb/chipidea/ci_hdrc_usb2.ko
   AUTOLOAD:=$(call AutoLoad,39,ci_hdrc_usb2,1)
   $(call AddDepends/usb)
