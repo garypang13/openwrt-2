@@ -1,4 +1,4 @@
-This generic GPIO watchdog is used on Huawei E970 (brcm47xx)
+This generic GPIO watchdog is used on Huawei E970 (bcm47xx)
 
 Signed-off-by: Mathias Adam <m.adam--openwrt@adamis.de>
 
