@@ -9,7 +9,7 @@ define KernelPackage/drm-vc4
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Broadcom VC4 Graphics
   DEPENDS:= \
-	@TARGET_brcm2708 +kmod-drm \
+	@TARGET_bcm27xx +kmod-drm \
 	+kmod-sound-core \
 	+kmod-sound-soc-core
   KCONFIG:= \
@@ -32,7 +32,7 @@ $(eval $(call KernelPackage,drm-vc4))
 define KernelPackage/hwmon-rpi-poe-fan
   SUBMENU:=$(HWMON_MENU)
   TITLE:=Raspberry Pi PoE HAT fan
-  DEPENDS:=@TARGET_brcm2708 +kmod-hwmon-core
+  DEPENDS:=@TARGET_bcm27xx +kmod-hwmon-core
   KCONFIG:=CONFIG_SENSORS_RPI_POE_FAN
   FILES:=$(LINUX_DIR)/drivers/hwmon/rpi-poe-fan.ko
   AUTOLOAD:=$(call AutoProbe,rpi-poe-fan)
@@ -54,7 +54,7 @@ define KernelPackage/sound-arm-bcm2835
   FILES:= \
 	$(LINUX_DIR)/drivers/staging/vc04_services/bcm2835-audio/snd-bcm2835.ko
   AUTOLOAD:=$(call AutoLoad,68,snd-bcm2835)
-  DEPENDS:=@TARGET_brcm2708
+  DEPENDS:=@TARGET_bcm27xx
   $(call AddDepends/sound)
 endef
 
@@ -74,7 +74,7 @@ define KernelPackage/sound-soc-bcm2835-i2s
   FILES:= \
 	$(LINUX_DIR)/sound/soc/bcm/snd-soc-bcm2835-i2s.ko
   AUTOLOAD:=$(call AutoLoad,68,snd-soc-bcm2835-i2s)
-  DEPENDS:=@TARGET_brcm2708 +kmod-sound-soc-core
+  DEPENDS:=@TARGET_bcm27xx +kmod-sound-soc-core
   $(call AddDepends/sound)
 endef
 
@@ -721,7 +721,7 @@ define KernelPackage/random-bcm2835
   KCONFIG:=CONFIG_HW_RANDOM_BCM2835
   FILES:=$(LINUX_DIR)/drivers/char/hw_random/bcm2835-rng.ko
   AUTOLOAD:=$(call AutoLoad,11,bcm2835-rng)
-  DEPENDS:=@TARGET_brcm2708 +kmod-random-core
+  DEPENDS:=@TARGET_bcm27xx +kmod-random-core
 endef
 
 define KernelPackage/random-bcm2835/description
@@ -737,7 +737,7 @@ define KernelPackage/smi-bcm2835
   KCONFIG:=CONFIG_BCM2835_SMI
   FILES:=$(LINUX_DIR)/drivers/misc/bcm2835_smi.ko
   AUTOLOAD:=$(call AutoLoad,20,bcm2835_smi)
-  DEPENDS:=@TARGET_brcm2708
+  DEPENDS:=@TARGET_bcm27xx
 endef
 
 define KernelPackage/smi-bcm2835/description
@@ -753,7 +753,7 @@ define KernelPackage/smi-bcm2835-dev
   KCONFIG:=CONFIG_BCM2835_SMI_DEV
   FILES:=$(LINUX_DIR)/drivers/char/broadcom/bcm2835_smi_dev.ko
   AUTOLOAD:=$(call AutoLoad,21,bcm2835_smi_dev)
-  DEPENDS:=@TARGET_brcm2708 +kmod-smi-bcm2835
+  DEPENDS:=@TARGET_bcm27xx +kmod-smi-bcm2835
 endef
 
 define KernelPackage/smi-bcm2835-dev/description
@@ -774,7 +774,7 @@ define KernelPackage/spi-bcm2835
     CONFIG_SPI_MASTER=y
   FILES:=$(LINUX_DIR)/drivers/spi/spi-bcm2835.ko
   AUTOLOAD:=$(call AutoLoad,89,spi-bcm2835)
-  DEPENDS:=@TARGET_brcm2708
+  DEPENDS:=@TARGET_bcm27xx
 endef
 
 define KernelPackage/spi-bcm2835/description
@@ -792,7 +792,7 @@ define KernelPackage/spi-bcm2835-aux
     CONFIG_SPI_MASTER=y
   FILES:=$(LINUX_DIR)/drivers/spi/spi-bcm2835aux.ko
   AUTOLOAD:=$(call AutoLoad,89,spi-bcm2835aux)
-  DEPENDS:=@TARGET_brcm2708
+  DEPENDS:=@TARGET_bcm27xx
 endef
 
 define KernelPackage/spi-bcm2835-aux/description
@@ -807,7 +807,7 @@ define KernelPackage/hwmon-bcm2835
   KCONFIG:=CONFIG_SENSORS_BCM2835
   FILES:=$(LINUX_DIR)/drivers/hwmon/bcm2835-hwmon.ko
   AUTOLOAD:=$(call AutoLoad,60,bcm2835-hwmon)
-  $(call AddDepends/hwmon,@TARGET_brcm2708)
+  $(call AddDepends/hwmon,@TARGET_bcm27xx)
 endef
 
 define KernelPackage/hwmon-bcm2835/description
@@ -825,7 +825,7 @@ define KernelPackage/i2c-bcm2708
   TITLE:=Broadcom BCM2708 I2C master controller driver
   KCONFIG+= \
 	CONFIG_I2C_BCM2708_BAUDRATE=100000
-  DEPENDS:=@TARGET_brcm2708 +kmod-i2c-core
+  DEPENDS:=@TARGET_bcm27xx +kmod-i2c-core
 endef
 
 define KernelPackage/i2c-bcm2708/description
@@ -840,7 +840,7 @@ I2C_BCM2835_MODULES:=\
 define KernelPackage/i2c-bcm2835
   $(call i2c_defaults,$(I2C_BCM2835_MODULES),59)
   TITLE:=Broadcom BCM2835 I2C master controller driver
-  DEPENDS:=@TARGET_brcm2708 +kmod-i2c-core
+  DEPENDS:=@TARGET_bcm27xx +kmod-i2c-core
 endef
 
 define KernelPackage/i2c-bcm2835/description
@@ -858,7 +858,7 @@ define KernelPackage/video-bcm2835
   FILES:= \
 	$(LINUX_DIR)/drivers/staging/vc04_services/bcm2835-camera/bcm2835-v4l2.ko
   AUTOLOAD:=$(call AutoLoad,65,bcm2835-v4l2)
-  $(call AddDepends/video,@TARGET_brcm2708 +kmod-video-videobuf2)
+  $(call AddDepends/video,@TARGET_bcm27xx +kmod-video-videobuf2)
 endef
 
 define KernelPackage/video-bcm2835/description
