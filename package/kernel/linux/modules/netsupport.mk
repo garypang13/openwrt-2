@@ -789,7 +789,7 @@ $(eval $(call KernelPackage,sched-core))
 define KernelPackage/sched-cake
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Cake fq_codel/blue derived shaper
-  DEPENDS:=@!LINUX_4_14 +kmod-sched-core
+  DEPENDS:=@!(LINUX_4_9||LINUX_4_14) +kmod-sched-core
   KCONFIG:=CONFIG_NET_SCH_CAKE
   FILES:=$(LINUX_DIR)/net/sched/sch_cake.ko
   AUTOLOAD:=$(call AutoProbe,sch_cake)
